@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+    //binding
+  }
+
+  //event handling
+
+  //lifecycle methods
+
+  render () {
+    return (
+      <div className="MVP">
+        <header className="MVP-header">
+          Knitting Charts!!!!!
+        </header>
+      <div>
+        Knitting Charts For Daaaays
+      </div>
+      </div>
+    );
+  }
 }
 
 export default App;
