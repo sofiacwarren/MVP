@@ -7,8 +7,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       stitchSelection: 'k',
-      chart: ['k','','','','','','','',''],
-      // chart: [],
+      // chart: ['k','','','','','','','',''],
+      chart: [],
       changedChart: [],
       rowsNC: '',
       columnsNC: ''

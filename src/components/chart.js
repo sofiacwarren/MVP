@@ -5,12 +5,13 @@ class Chart extends React.Component {
   constructor(props) {
     super(props)
     //sizing cells
-    // this.width = 38 * props.columnsNC;
-    this.width = 38 * 3;
+    // this.width = 38 * 3;
+    // console.log(this.width, props.columnsNC)
   }
-
   render() {
-  return <div className='chart' style={{width: `${this.width}px`}}>
+    const width = 38 * this.props.columnsNC;
+
+    return <div className='chart' style={{width: `${width}px`}}>
     {this.props.chart.map((value, index) => {
       // console.log(index, value)
       return <div
