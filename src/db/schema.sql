@@ -12,6 +12,7 @@ CREATE TABLE users (
 CREATE TABLE charts (
   chart_id serial PRIMARY KEY,
   chart VARCHAR,
+  columns INT,
   user_id INT
   CONSTRAINT fk_user_id
     FOREIGN KEY(user_id)

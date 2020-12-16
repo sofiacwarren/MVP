@@ -9,6 +9,16 @@ app.use(bodyParser.json());
 //get chart
 
 //post chart
+app.post('/charts', (req, res) => {
+  let input = {};
+  db.saveChart(input)
+    .then((res) => {
+      res.status(200).send('saved!');
+    })
+    .catch((error) => {
+      res.status(400).send('error server side saving chart');
+    })
+})
 
 //put chart
 

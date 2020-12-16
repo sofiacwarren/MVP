@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stitchSelection: 'k',
+      stitchSelection: '',
       // chart: ['k','','','','','','','',''],
       chart: [],
       changedChart: [],
@@ -15,6 +15,7 @@ class App extends React.Component {
     }
     //binding
     this.handleNewClick = this.handleNewClick.bind(this);
+    this.handleStitchSelection = this.handleStitchSelection.bind(this);
   }
 
   //event handling
@@ -32,7 +33,15 @@ class App extends React.Component {
     this.setState(chart);
   }
 
-  //lifecycle methods
+  handleStitchSelection(value) {
+    console.log('sssselected: ', value)
+    this.setState({stitchSelection: value})
+  }
+
+  handleSave(e) {
+    console.log('saving chart data', e.target.value);
+
+  }
 
   render () {
 
@@ -45,9 +54,26 @@ class App extends React.Component {
 
         <div className="stitchSelector">
           Stitch Selector:
-          <button>Knit</button>
-          <button>Purl</button>
-          <button>Yarn Over</button>
+          <button
+            type='button'
+            name='knit'
+            onClick={() => this.handleStitchSelection('k')}
+            >Knit
+          </button>
+
+          <button
+            type='button'
+            name='purl'
+            onClick={() => this.handleStitchSelection('p')}
+            >Purl
+          </button>
+
+          <button
+            type='button'
+            name='yarn over'
+            onClick={() => this.handleStitchSelection('y/o')}
+            >Yarn Over
+          </button>
         </div>
 
         <Chart
