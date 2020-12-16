@@ -17,9 +17,22 @@
   color: white;
 }
 
-td {
-  width: 16px;
-  height: 16px;
-  border: 1px solid black;
+.cell {
+  /* all: unset; */
+  width: 32px;
+  height: 32px;
+  border: 2px solid black;
   margin: 1px;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart {
+  /* all: unset; */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  /* width: 70px; */
 }

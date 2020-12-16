@@ -17,3 +17,6 @@ CREATE TABLE charts (
     FOREIGN KEY(user_id)
 	    REFERENCES users(user_id)
 )
+
+INSERT INTO users VALUES ("fia", "my@email.com", "https://farm3.static.flickr.com/2297/2086601342_e2827f1885.jpg?v=0");
+INSERT INTO charts VALUES ("['k', 'p', 'k', 'p', 'k', 'p']", 1)
