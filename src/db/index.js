@@ -1,9 +1,5 @@
-const mongoose = require('mongoose');
-const db = mongoose.connection;
-mongoose.connect('mongodb://localhost/knitting_charts', {useNewUrlParser: true})
-db.on('connected', () => {
-  console.log(`connected to db at ${db.host}:${db.port}`);
-});
+var pgp = require('pg-promise')();
+var db = pgp('postgres://postgres:password@localhost:5432/knitting_charts');
 
 //get chart
 const retrieveChart = (cb) => {
@@ -11,8 +7,14 @@ const retrieveChart = (cb) => {
 }
 
 //post chart
-const saveChart = (input, cb) => {
-
+const saveChart = async (input, cb) => {
+  let values = [input.chart, input.chart_name, input.columns, input.user_id];
+  try {
+    let res = await db.query(`INSERT INTO charts (chart, chart_name, columns, user_id) VALUES ($1, $2, $3, $4)`, values);
+  }
+  catch (err) {
+    console.log('error db cannot post', values, err);
+  }
 }
 
 //put chart
