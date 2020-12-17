@@ -1,5 +1,6 @@
 .MVP {
   /* text-align: center; */
+  /* all:initial; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +9,7 @@
 }
 
 .MVP-header {
+  /* all:initial; */
   background-color: rgb(248, 190, 10, .6);
   min-height: 10vh;
   display: flex;
@@ -20,7 +22,7 @@
 }
 
 .cell {
-  /* all: unset; */
+  /* all:initial; */
   width: 32px;
   height: 32px;
   border: 2px solid black;
@@ -34,7 +36,7 @@
 }
 
 .chart {
-  /* all: unset; */
+  /* all:initial; */
   display: flex;
   flex-wrap: wrap;
   padding: 0;
@@ -43,8 +45,7 @@
 
 .stitchSelector {
   background:rgb(206, 133, 62, .5);
-  /* font-family: 'KnitfontB';
-  font-size: calc(10px + 2vmin); */
+  /* all:initial; */
   color: white;
   font-weight: bold;
   text-shadow: 3px 3px 3px rgb(7, 7, 7);

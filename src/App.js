@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Chart from './components/chart.js';
 import Userdrawer from './components/userDrawer.js';
+import NewChart from './components/newChartModal.js';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -19,7 +20,9 @@ class App extends React.Component {
     this.handleNewClick = this.handleNewClick.bind(this);
     this.handleStitchSelection = this.handleStitchSelection.bind(this);
     this.handleSave = this.handleSave.bind(this);
-    this.handleChange= this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeSearch = this.handleChangeSearch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   //event handling
@@ -46,16 +49,11 @@ class App extends React.Component {
   handleChange(e) {
     this.setState({chart_name: e.target.value})
   }
+  handleChangeSearch(e) {
+    this.setState({chart_name: e.target.value})
+  }
 
   handleSave(e) {
-    // let request = {method: 'POST',
-    // headers: {'Content-Type': 'application/json'}, mode: 'no-cors'};
-    // let newChartInfo = this.state.chart;
-    // request.body = JSON.stringify(newChartInfo);
-    // console.log('saving chart data', request);
-    // fetch('http://localhost:3030/charts', request)
-    //   .then(console.log('saved'))
-    //   .catch(console.log('error'))
     e.preventDefault();
     axios.post('http://localhost:3030/charts', {
       chart: JSON.stringify(this.state.chart),
@@ -66,6 +64,16 @@ class App extends React.Component {
       .catch((err) => console.log(err))
   }
 
+  handleSearch(e) {
+    e.preventDefault();
+    axios.post('http://localhost:3030/chart', {chart_name: this.state.chart_name})
+      .then((data) => {
+        console.log('fe data', typeof(data.data[0].chart), data.data[0].columns)
+        this.setState({chart: JSON.parse(data.data[0].chart), columnsNC: data.data[0].columns})
+      })
+      .catch((err) => console.log('could not display chart'))
+  }
+
   render () {
 
     return (
@@ -74,7 +82,20 @@ class App extends React.Component {
           TheProcrastiKNITor!
         </header>
 
-          {/* <Userdrawer/> */}
+      <div>
+        <form onSubmit={this.handleSearch}>
+          <input
+            name='name it'
+            placeholder="Search by Name"
+            value={this.state.chart_name}
+            onChange={this.handleChangeSearch}
+          ></input>
+          <button
+            type='submit'
+            >Search Chart!
+          </button>
+        </form>
+      </div>
 
         <div className="stitchSelector">
           StitchPalette:
@@ -138,6 +159,10 @@ class App extends React.Component {
           onClick={this.handleNewClick}
           >New Chart!</button>
       </div>
+
+
+      {/* <NewChart/> */}
+
       </div>
     );
   }

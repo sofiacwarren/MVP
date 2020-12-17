@@ -11,28 +11,41 @@ app.use(express.static(__dirname + '/../../build'));
 app.use(cors());
 
 //get chart
-app.get('/charts', (req, res) => {
-
+app.post('/chart', async (req, res) => {
+  // console.log('lol', req.body);
+  try {
+    let input = await {
+      chart_name: req.body.chart_name
+    };
+    queries.retrieveChart(input)
+      .then((data) => {
+        console.log('data', data)
+        res.send(data)
+      })
+  }
+  catch (err) {
+    res.status(400).send('error server side getting chart');
+  }
 })
 
 //post chart
 app.post('/charts', async (req, res) => {
-try {
-  let input = await {
-    chart: req.body.chart,
-    chart_name: req.body.chart_name || 'test',
-    columns: req.body.columns,
-    user_id: req.body.user_id || 1
-  };
-  queries.saveChart(input)
-  // console.log('server side', res)
+  try {
+    let input = await {
+      chart: req.body.chart,
+      chart_name: req.body.chart_name || 'test',
+      columns: req.body.columns,
+      user_id: req.body.user_id || 1
+    };
+    queries.saveChart(input)
+    // console.log('server side', res)
 
-    .then(() => res.status(200).send('saved!'));
-}
-catch (err) {
+      .then(() => res.status(200).send('saved!'));
+  }
+  catch (err) {
       res.status(400).send('error server side saving chart');
     }
-})
+  })
 
 //put chart
 

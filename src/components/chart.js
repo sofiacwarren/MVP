@@ -6,7 +6,7 @@ class Chart extends React.Component {
     super(props)
   }
   render() {
-    const width = 38 * this.props.columnsNC;
+    const width = 38 * (this.props.columnsNC);
 
     return <div className='chart' style={{width: `${width}px`}}>
     {this.props.chart.map((value, index) => {

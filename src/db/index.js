@@ -2,8 +2,16 @@ var pgp = require('pg-promise')();
 var db = pgp('postgres://postgres:password@localhost:5432/knitting_charts');
 
 //get chart
-const retrieveChart = (cb) => {
-  // db.query('', [])
+const retrieveChart = async (input, cb) => {
+  let value = input.chart_name;
+  try {
+    let res = await db.query(`SELECT * FROM charts WHERE charts.chart_name = $1`, value);
+    console.log(res)
+    return res;
+  }
+  catch (err) {
+    console.log('error db cannot get chart', value, err);
+  }
 }
 
 //post chart

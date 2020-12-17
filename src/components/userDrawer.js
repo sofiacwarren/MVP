@@ -21,7 +21,7 @@ const Userdrawer = () => {
       <Drawer
         title="Basic Drawer"
         placement="right"
-        closable={true}
+        closable={false}
         onClose={onClose}
         visible={visible}
       >
