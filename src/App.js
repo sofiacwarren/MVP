@@ -11,10 +11,11 @@ class App extends React.Component {
     this.state = {
       stitchSelection: '',
       chart: ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","y/o","","y/o","","y/o","y/o","y/o","y/o","","","","y/o","","","","","","","","","y/o","","y/o","","y/o","","","","y/o","","y/o","","","","","","","","","","y/o","y/o","y/o","","y/o","y/o","","","y/o","","y/o","","","","","","","","","","y/o","","y/o","","y/o","","","","","y/o","","","","","","","","","","","y/o","","y/o","","y/o","","","","","y/o","","","","","","","","","","","y/o","","y/o","","y/o","y/o","y/o","","","y/o","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","y/o","y/o","y/o","","y/o","","y/o","","y/o","y/o","y/o","","y/o","y/o","y/o","","y/o","y/o","y/o","","","y/o","","","y/o","","y/o","","y/o","","","","y/o","","y/o","","y/o","","","","","y/o","","","y/o","y/o","y/o","","y/o","y/o","","","y/o","y/o","y/o","","y/o","y/o","","","","y/o","","","y/o","","y/o","","y/o","","","","y/o","y/o","","","y/o","","","","","y/o","","","y/o","","y/o","","y/o","","","","y/o","","y/o","","y/o","","","","","y/o","","","y/o","","y/o","","y/o","y/o","y/o","","y/o","","","y/o","y/o","y/o","y/o","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      changedChart: [],
+      colorChart: ["cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell","cell"],
       rowsNC: '',
       columnsNC: '20',
-      chart_name: ''
+      chart_name: '',
+      isColoring: false
     }
     //binding
     this.handleNewClick = this.handleNewClick.bind(this);
@@ -23,27 +24,46 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleColorSelection = this.handleColorSelection.bind(this);
   }
 
   //event handling
   handleNewClick() {
     const rows = window.prompt('How many rows?');
     const columns = window.prompt('How many stitches wide?');
-    this.setState({rowsNC: rows, columnsNC: columns, chart: Array(rows * columns).fill('')});
-
+    this.setState({
+      rowsNC: rows,
+      columnsNC: columns,
+      chart: Array(rows * columns).fill(''),
+      colorChart: Array(rows * columns).fill('cell')
+    });
   }
 
   handleCellClick(index) {
     //handle stitch selection for cell
     console.log('clickclickclick', index);
-    let chart = this.state.chart;
+    if (this.state.isColoring === false) {
+    var chart = this.state.chart;
     chart[index] = this.state.stitchSelection
     this.setState(chart);
+    } else if (this.state.colorChart[index] === 'cell') {
+      let colorChart = this.state.colorChart;
+      colorChart[index] = 'cell-colored'
+      this.setState(colorChart)
+    } else {
+      let colorChart = this.state.colorChart;
+      colorChart[index] = 'cell'
+      this.setState(colorChart)
+    }
   }
 
   handleStitchSelection(value) {
     console.log('sssselected: ', value)
     this.setState({stitchSelection: value})
+  }
+
+  handleColorSelection(index) {
+    this.setState({isColoring: true});
   }
 
   handleChange(e) {
@@ -129,6 +149,13 @@ class App extends React.Component {
           &#60;3
           <button
             type='button'
+            name='secondary color'
+            onClick={() => this.handleColorSelection()}
+            >Secondary Color
+          </button>
+          &#60;3
+          <button
+            type='button'
             name='erase'
             onClick={() => this.handleStitchSelection('')}
             >Erase
@@ -140,6 +167,7 @@ class App extends React.Component {
           columnsNC={this.state.columnsNC}
           chart={this.state.chart}
           handleCellClick={this.handleCellClick.bind(this)}
+          colorChart={this.state.colorChart}
         />
       <div>
         <form onSubmit={this.handleSave}>

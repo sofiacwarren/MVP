@@ -35,6 +35,19 @@
   font-weight: bolder;
   text-shadow: 1px, 1px, 1px white;
 }
+.cell-colored {
+  /* all:initial; */
+  width: 32px;
+  height: 32px;
+  border: 2px solid black;
+  margin: 1px;
+  background: orchid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  text-shadow: 1px, 1px, 1px white;
+}
 
 .chart {
   /* all:initial; */

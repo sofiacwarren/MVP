@@ -11,7 +11,9 @@ class Chart extends React.Component {
     return <div className='chart' style={{width: `${width}px`}}>
     {this.props.chart.map((value, index) => {
       return <div
-          className='cell'
+          // className='cell'
+          className={this.props.colorChart[index]}
+          id={index}
           key={index}
           onClick={() => this.props.handleCellClick(index)}>
             {value}
