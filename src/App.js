@@ -59,7 +59,7 @@ class App extends React.Component {
 
   handleStitchSelection(value) {
     console.log('sssselected: ', value)
-    this.setState({stitchSelection: value})
+    this.setState({stitchSelection: value, isColoring: false})
   }
 
   handleColorSelection(index) {
